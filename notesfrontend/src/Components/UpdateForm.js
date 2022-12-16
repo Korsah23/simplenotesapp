@@ -4,11 +4,16 @@ import axios from "axios";
 
 
 export default function UpdateForm(){
-    const { title,body,id } = useParams()
+    //get id and title from the link with useparams
+    const { title,id } = useParams()
+    
+    //set state for updated title,body and response
     const [newTitle, setNewTitle] = useState("");
     const [newBody, setNewBody] = useState("");
     const [response, setResponse] = useState([]);
+    const navigate = useNavigate();
 
+    //get the notes data from the api using the id
     useEffect(()=>{
         axios.get(`http://127.0.0.1:8000/notes/${id}/`)
         .then(res=>{
@@ -17,10 +22,11 @@ export default function UpdateForm(){
         } )
     },[] )
    
-    const navigate = useNavigate();
-
+    
+    //function to handle updates
     function handleUpdate(e){
         
+        //makes a put request to backend with updated data
         axios.put(`http://127.0.0.1:8000/notes/${id}/`, {title:newTitle,body:newBody})
   .then(response => {
     console.log(response.data);
