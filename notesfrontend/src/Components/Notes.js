@@ -3,10 +3,11 @@ import axios from 'axios';
 import UpdateButton from './UpdateButton';
 
 
-export default function Notes(props){
+export default function Notes(){
+    //set notes state
     const [notes,setNotes] = useState([])
     
-console.log(props)
+    //get notes data from the backend api
     useEffect(()=>{
         axios.get("http://127.0.0.1:8000/notes/")
         .then(res=>{
@@ -14,7 +15,7 @@ console.log(props)
         } )
     },[] )
     
-  
+  //function to handle delete request
     function handleDelete(id){
         axios.delete(`http://127.0.0.1:8000/notes/${id}/`)
   .then(response => {
@@ -25,6 +26,7 @@ console.log(props)
     // Handle any error that occurred
     console.error(error);
   });
+        //reload the page 
   window.location.reload(false);
     }
 
