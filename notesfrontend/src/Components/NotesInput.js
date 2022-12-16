@@ -6,15 +6,15 @@ import Notes from './Notes';
 
 
 export default function NotesInput(){
+    //set up states
     const [title, setTitle] = useState('');
-
     const [body, setBody] = useState('');
-    const [response,setResponse] = useState([])
+    const [response,setResponse] = useState([]);
     
   
     const handleSubmit = e => {
-       // e.preventDefault();
-        
+       
+        //make a post request to api
         axios.post('http://127.0.0.1:8000/notes/', { title, body })
           .then(res => {
             // Handle the response data
